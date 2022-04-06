@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
+import { MultiChatWindow, useMultiChatLogic, MultiChatSocket} from 'react-chat-engine-advanced';
 import './App.css';
+// traffic to the server
+const projectId: string = '16cf40e3-f921-4e1b-aa96-906250442fe2';
+const username: string = 'Muna';
+const secret: string = 'Muna@194';
+
 
 function App() {
+  // manage state
+  const chatProps = useMultiChatLogic(projectId, username, secret)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/*Sockets*/}
+      <MultiChatSocket {...chatProps}/>
+      {/* connecting components to the server*/}
+      <MultiChatWindow {...chatProps} style={{ height: '100vh'}}/>
     </div>
   );
 }
